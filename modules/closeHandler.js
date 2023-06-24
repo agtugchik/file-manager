@@ -1,7 +1,8 @@
 const closeHandler = (rl, username) => {
-  rl.on("close", () =>
-    console.log(`Thank you for using File Manager, ${username}, goodbye!`)
-  );
+  rl.on("close", () => {
+    console.log(`Thank you for using File Manager, ${username}, goodbye!`);
+    process.exit();
+  });
 
   process.on("SIGINT", () => {
     {
