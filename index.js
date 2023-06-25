@@ -1,6 +1,7 @@
 import { argv, stdin, stdout } from "process";
 import { createInterface } from "readline";
 import { homedir } from "os";
+import checkCommand from "./modules/checkCommand.js";
 import closeHandler from "./modules/closeHandler.js";
 import upHandler from "./modules/upHandler.js";
 import cdHandler from "./modules/cdHandler.js";
@@ -22,11 +23,11 @@ You are currently in ${currentPath}`);
     if (msg === ".exit") rl.close();
     else if (msg === "up") {
       currentPath = upHandler(currentPath);
-    } else if (/^cd /.test(msg) && msg.replace(/^cd /, "").length > 0) {
+    } else if (checkCommand("cd", msg)) {
       currentPath = await cdHandler(currentPath, msg);
     } else if (msg === "ls") {
       lsHandler(currentPath);
-    } else if (/^cat /.test(msg) && msg.replace(/^cat /, "").length > 0) {
+    } else if (checkCommand("cat", msg)) {
       catHamndler(currentPath, msg);
     } else console.log("Invalid input");
   });
