@@ -5,6 +5,7 @@ import closeHandler from "./modules/closeHandler.js";
 import upHandler from "./modules/upHandler.js";
 import cdHandler from "./modules/cdHandler.js";
 import lsHandler from "./modules/lsHandler.js";
+import catHamndler from "./modules/catHandler.js";
 
 const run = async () => {
   let currentPath = homedir().toLowerCase();
@@ -25,6 +26,8 @@ You are currently in ${currentPath}`);
       currentPath = await cdHandler(currentPath, msg);
     } else if (msg === "ls") {
       lsHandler(currentPath);
+    } else if (/^cat /.test(msg) && msg.replace(/^cat /, "").length > 0) {
+      catHamndler(currentPath, msg);
     } else console.log("Invalid input");
   });
 
