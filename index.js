@@ -7,6 +7,7 @@ import upHandler from "./modules/upHandler.js";
 import cdHandler from "./modules/cdHandler.js";
 import lsHandler from "./modules/lsHandler.js";
 import catHamndler from "./modules/catHandler.js";
+import addHandler from "./modules/addHandler.js";
 
 const run = async () => {
   let currentPath = homedir().toLowerCase();
@@ -29,6 +30,8 @@ You are currently in ${currentPath}`);
       lsHandler(currentPath);
     } else if (checkCommand("cat", msg)) {
       currentPath = catHamndler(currentPath, msg);
+    } else if (checkCommand("add", msg)) {
+      currentPath = await addHandler(currentPath, msg);
     } else {
       console.log("Invalid input");
       console.log(`You are currently in ${currentPath}`);
