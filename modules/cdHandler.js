@@ -6,7 +6,7 @@ const cdHandler = async (currentPath, msg) => {
   const newCurrentPath = getNewPath(currentPath, msg, "cd");
   try {
     await access(newCurrentPath);
-    console.log(`You are currently in ${currentPath}`);
+    console.log(`You are currently in ${newCurrentPath}`);
   } catch {
     console.log("Invalid input");
   }

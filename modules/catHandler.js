@@ -13,7 +13,7 @@ const catHamndler = (currentPath, msg) => {
     console.log(`You are currently in ${newCurrentPath}`);
   });
   readableStreme.on("error", () => {
-    console.log("Invalid input");
+    console.log("Operation failed");
     console.log(`You are currently in ${currentPath}`);
   });
   return newCurrentPath.toLowerCase();

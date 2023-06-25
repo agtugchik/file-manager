@@ -10,7 +10,7 @@ const addHandler = async (currentPath, msg) => {
     await writeFile(filePath, "");
     console.log(`You are currently in ${newCurrentPath}`);
   } catch {
-    console.log("Invalid input");
+    console.log("Operation failed");
     console.log(`You are currently in ${currentPath}`);
   }
   return newCurrentPath;

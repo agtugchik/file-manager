@@ -34,7 +34,6 @@ You are currently in ${currentPath}`);
     } else if (checkCommand("add", msg)) {
       currentPath = await addHandler(currentPath, msg);
     } else if (checkCommand("rn", msg)) {
-      // console.log("rn");
       currentPath = await rnHandler(currentPath, msg);
     } else {
       console.log("Invalid input");
