@@ -28,8 +28,11 @@ You are currently in ${currentPath}`);
     } else if (msg === "ls") {
       lsHandler(currentPath);
     } else if (checkCommand("cat", msg)) {
-      catHamndler(currentPath, msg);
-    } else console.log("Invalid input");
+      currentPath = catHamndler(currentPath, msg);
+    } else {
+      console.log("Invalid input");
+      console.log(`You are currently in ${currentPath}`);
+    }
   });
 
   closeHandler(rl, username);

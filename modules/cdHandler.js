@@ -1,16 +1,16 @@
 import { join, sep } from "path";
 import { access } from "fs/promises";
+import getNewPath from "./getNewPath.js";
 
 const cdHandler = async (currentPath, msg) => {
-  const newCurrentPath = join(currentPath, msg.replace(/^cd /, ""));
+  const newCurrentPath = getNewPath(currentPath, msg, "cd");
   try {
     await access(newCurrentPath);
-    currentPath = newCurrentPath;
     console.log(`You are currently in ${currentPath}`);
   } catch {
     console.log("Invalid input");
   }
-  return currentPath.toLowerCase();
+  return newCurrentPath.toLowerCase();
 };
 
 export default cdHandler;
