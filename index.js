@@ -9,6 +9,7 @@ import lsHandler from "./modules/lsHandler.js";
 import catHamndler from "./modules/catHandler.js";
 import addHandler from "./modules/addHandler.js";
 import rnHandler from "./modules/rnHandler.js";
+import rmHandler from "./modules/rmHandler.js";
 
 const run = async () => {
   let currentPath = homedir().toLowerCase();
@@ -35,6 +36,8 @@ You are currently in ${currentPath}`);
       currentPath = await addHandler(currentPath, msg);
     } else if (checkCommand("rn", msg)) {
       currentPath = await rnHandler(currentPath, msg);
+    } else if (checkCommand("rm", msg)) {
+      currentPath = await rmHandler(currentPath, msg);
     } else {
       console.log("Invalid input");
       console.log(`You are currently in ${currentPath}`);
