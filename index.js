@@ -50,7 +50,7 @@ You are currently in ${currentPath}`);
     } else if (checkCommand("cp", msg)) {
       cpHandler(currentPath, msg, setPath);
     } else if (checkCommand("mv", msg)) {
-      mvHandler(currentPath, msg, setPath);
+      await mvHandler(currentPath, msg, setPath);
     } else if (checkCommand("os", msg)) {
       osHandler(currentPath, msg);
     } else if (checkCommand("hash", msg)) {
