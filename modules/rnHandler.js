@@ -4,18 +4,10 @@ import { rename } from "fs/promises";
 
 const rnHandler = async (currentPath, msg) => {
   const [, firstArg, secondArg] = msg.split(" ");
-  const oldPath = getNewPath(currentPath, firstArg, "");
+  const oldPath = getNewPath(currentPath, firstArg || "", "");
   const newCurrentPath = join(...oldPath.split(sep).slice(0, -1), sep);
-  const newPath = getNewPath(newCurrentPath, secondArg, "");
+  const newPath = getNewPath(newCurrentPath, secondArg || "", "");
 
-  // console.log(`IN RN HANDLER
-  // CURRENT PATH: ${currentPath}
-  // MSG: ${msg}
-  // FIRST ARG: ${firstArg}
-  // SECOND ARG: ${secondArg}
-  // OLD PATH: ${oldPath}
-  // NEW PATH: ${newPath}
-  // NEW CURRENT PATH: ${newCurrentPath}`);
   try {
     await rename(oldPath, newPath);
     console.log(`You are currently in ${newCurrentPath}`);
