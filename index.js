@@ -12,6 +12,7 @@ import rnHandler from "./modules/rnHandler.js";
 import rmHandler from "./modules/rmHandler.js";
 import cpHandler from "./modules/cpHandler.js";
 import mvHandler from "./modules/mvHandler.js";
+import osHandler from "./modules/osHandler.js";
 
 const run = async () => {
   let currentPath = homedir().toLowerCase();
@@ -47,6 +48,8 @@ You are currently in ${currentPath}`);
       cpHandler(currentPath, msg, setPath);
     } else if (checkCommand("mv", msg)) {
       mvHandler(currentPath, msg, setPath);
+    } else if (checkCommand("os", msg)) {
+      osHandler(currentPath, msg);
     } else {
       console.log("Invalid input");
       console.log(`You are currently in ${currentPath}`);
