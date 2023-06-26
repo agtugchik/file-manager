@@ -4,7 +4,7 @@ import { createReadStream, createWriteStream } from "fs";
 import { pipeline } from "stream";
 import { rm } from "fs/promises";
 
-const cpHandler = (currentPath, msg, setPath) => {
+const mvHandler = (currentPath, msg, setPath) => {
   const [, firstArg, secondArg] = msg.split(" ");
   const sourcePath = getNewPath(currentPath, firstArg || "", "");
   const sourceDirPath = parse(sourcePath).dir;
@@ -15,15 +15,16 @@ const cpHandler = (currentPath, msg, setPath) => {
   readStream.on("error", async () => {
     rm(destinationPath);
   });
-  pipeline([readStream, writeStream], (err) => {
+  pipeline([readStream, writeStream], async (err) => {
     if (err) {
       console.log("Operation failed");
       console.log(`You are currently in ${currentPath}`);
     } else {
+      await rm(sourcePath);
       setPath(newCurrentPath);
       console.log(`You are currently in ${newCurrentPath}`);
     }
   });
 };
 
-export default cpHandler;
+export default mvHandler;
