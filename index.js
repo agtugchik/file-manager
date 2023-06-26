@@ -13,6 +13,7 @@ import rmHandler from "./modules/rmHandler.js";
 import cpHandler from "./modules/cpHandler.js";
 import mvHandler from "./modules/mvHandler.js";
 import osHandler from "./modules/osHandler.js";
+import hashHandler from "./modules/hashHandler.js";
 
 const run = async () => {
   let currentPath = homedir().toLowerCase();
@@ -50,6 +51,8 @@ You are currently in ${currentPath}`);
       mvHandler(currentPath, msg, setPath);
     } else if (checkCommand("os", msg)) {
       osHandler(currentPath, msg);
+    } else if (checkCommand("hash", msg)) {
+      await hashHandler(currentPath, msg, setPath);
     } else {
       console.log("Invalid input");
       console.log(`You are currently in ${currentPath}`);
