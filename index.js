@@ -15,6 +15,7 @@ import mvHandler from "./modules/mvHandler.js";
 import osHandler from "./modules/osHandler.js";
 import hashHandler from "./modules/hashHandler.js";
 import compressHandler from "./modules/compressHandler.js";
+import decompressHandler from "./modules/decompressHandler.js";
 
 const run = async () => {
   let currentPath = homedir().toLowerCase();
@@ -56,6 +57,8 @@ You are currently in ${currentPath}`);
       await hashHandler(currentPath, msg, setPath);
     } else if (checkCommand("compress", msg)) {
       compressHandler(currentPath, msg, setPath);
+    } else if (checkCommand("decompress", msg)) {
+      decompressHandler(currentPath, msg, setPath);
     } else {
       console.log("Invalid input");
       console.log(`You are currently in ${currentPath}`);
