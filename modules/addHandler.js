@@ -1,10 +1,10 @@
 import { writeFile } from "fs/promises";
-import { join, sep } from "path";
+import { parse } from "path";
 import getNewPath from "./getNewPath.js";
 
 const addHandler = async (currentPath, msg) => {
   const filePath = getNewPath(currentPath, msg, "add");
-  const newCurrentPath = join(...filePath.split(sep).slice(0, -1), sep);
+  const newCurrentPath = parse(filePath).dir;
 
   try {
     await writeFile(filePath, "");
