@@ -1,4 +1,4 @@
-import { createGzip } from "zlib";
+import { createBrotliCompress } from "zlib";
 import { createReadStream, createWriteStream } from "fs";
 import { pipeline } from "stream";
 import getNewPath from "./getNewPath.js";
@@ -8,13 +8,15 @@ import { rm } from "fs/promises";
 const compressHandler = (currentPath, msg, setPath) => {
   const [, firstArg, secondArg] = msg.split(" ");
   const sourcePath = getNewPath(currentPath, firstArg || "", "");
-  const sourceDirPath = parse(sourcePath).dir;
-  const destinationPath = getNewPath(sourceDirPath, secondArg || "", "");
+  const destinationPath = getNewPath(currentPath, secondArg || "", "");
   const newCurrentPath = parse(destinationPath).dir;
   const readStream = createReadStream(sourcePath);
   const writeStream = createWriteStream(destinationPath);
-  const gzip = createGzip();
+  const gzip = createBrotliCompress();
   readStream.on("error", async () => {
+    rm(destinationPath);
+  });
+  writeStream.on("error", async () => {
     rm(destinationPath);
   });
   pipeline([readStream, gzip, writeStream], (err) => {
